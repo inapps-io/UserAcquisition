@@ -1,0 +1,6 @@
+
+target 'UserAcquisition_Tests' do
+  pod 'UserAcquisition', :path => '../'
+  
+  
+end
