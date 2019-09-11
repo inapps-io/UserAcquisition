@@ -194,7 +194,7 @@ extension UserAcquisition {
             }
         }
         
-        public mutating func setSearchAds(_ searchAdsData: [String: Any]){
+        public mutating func setSearchAds(_ searchAdsData: [String: NSObject]){
             
             if let jsonData = try? JSONSerialization.data(withJSONObject: searchAdsData, options: .prettyPrinted){
                 self.searchAdsRaw = String(data: jsonData, encoding: .utf8) ?? ""
