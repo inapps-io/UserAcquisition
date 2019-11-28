@@ -12,7 +12,7 @@ UserAcquisition is available through [CocoaPods](https://cocoapods.org). To inst
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'UserAcquisition', :git => "https://github.com/97mik/UserAcquisition.git"
+pod 'UserAcquisition', :git => "https://github.com/inapps-io/UserAcquisition.git"
 ```
 
 ## Usage
@@ -60,7 +60,10 @@ YMMYandexMetrica.requestAppMetricaDeviceID(withCompletionQueue: .main) { [unowne
 
 ## Author
 
-Mikhail Verenich, 97mik@mail.ru
+Mikhail Verenich
+
+Support:
+hi@inapps.io
 
 ## License
 
