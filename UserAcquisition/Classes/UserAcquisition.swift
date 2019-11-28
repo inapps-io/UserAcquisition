@@ -2,8 +2,8 @@
 //  LTV.swift
 //  LTV
 //
-//  Created by Igor Khmurets on 9/24/17.
-//  Copyright © 2017 dp. All rights reserved.
+//   
+//  Copyright © 2019 dp. All rights reserved.
 //
 
 import Foundation
@@ -98,7 +98,7 @@ public class UserAcquisition: NSObject {
             "extra": extra,
             "api_key": APIKey
         ]
-        var request = URLRequest(url: URL(string: "https://api.subr.app/v2/receipt")!)
+        var request = URLRequest(url: URL(string: "https://api.inapps.io/v2/receipt")!)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: params)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
