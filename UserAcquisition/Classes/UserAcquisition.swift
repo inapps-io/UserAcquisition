@@ -18,9 +18,11 @@ public class UserAcquisition: NSObject {
     public var conversionInfo = UserAcquisition.Info()
     
     private var APIKey = ""
+    private var urlRequest = ""
 
-    public func configure(withAPIKey APIKey: String) {
+    public func configure(withAPIKey APIKey: String, urlRequest: String = "https://api.inapps.io/v2/receipt") {
         self.APIKey = APIKey
+        self.urlRequest = urlRequest
     }
     
     public func logPurchase(of product: SKProduct) {
@@ -98,7 +100,7 @@ public class UserAcquisition: NSObject {
             "extra": extra,
             "api_key": APIKey
         ]
-        var request = URLRequest(url: URL(string: "https://api.inapps.io/v2/receipt")!)
+        var request = URLRequest(url: URL(string: urlRequest)!)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: params)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
