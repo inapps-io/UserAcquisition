@@ -86,7 +86,8 @@ public class UserAcquisition: NSObject {
             "appmetrica_device_id": info.appmetricaId,
             "adjust_raw": info.adjustRaw,
             "appsflyer_raw": info.appsFlyerRaw,
-            "searchads_raw": info.searchAdsRaw
+            "searchads_raw": info.searchAdsRaw,
+            "branch_raw": info.branchRaw
         ]
         for (field, value) in info.extra {
             extra[field] = value
@@ -140,6 +141,7 @@ extension UserAcquisition {
         var adjustRaw = ""
         var appsFlyerRaw = ""
         var searchAdsRaw = ""
+        var branchRaw = ""
         var extra = [String: Any]()
 
         public mutating func setAppsFlyerData(_ appsFlyerData: [String: Any]) {
@@ -200,6 +202,13 @@ extension UserAcquisition {
             
             if let jsonData = try? JSONSerialization.data(withJSONObject: searchAdsData, options: .prettyPrinted){
                 self.searchAdsRaw = String(data: jsonData, encoding: .utf8) ?? ""
+            }
+        }
+        
+        public mutating func setBranch(_ branchData: [AnyHashable: Any]){
+            
+            if let jsonData = try? JSONSerialization.data(withJSONObject: branchData, options: .prettyPrinted){
+                self.branchRaw = String(data: jsonData, encoding: .utf8) ?? ""
             }
         }
     }
