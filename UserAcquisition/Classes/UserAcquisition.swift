@@ -205,7 +205,7 @@ extension UserAcquisition {
             }
         }
         
-        public mutating func setBranch(_ branchData: [AnyHashable: Any]){
+        public mutating func setBranch(_ branchData: [String: Any]){
             
             if let jsonData = try? JSONSerialization.data(withJSONObject: branchData, options: .prettyPrinted){
                 self.branchRaw = String(data: jsonData, encoding: .utf8) ?? ""
