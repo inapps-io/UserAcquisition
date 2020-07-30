@@ -63,6 +63,7 @@ public class UserAcquisition: NSObject {
                 return source
             }
         }
+        
         var afi: String? {
             if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
                 return ASIdentifierManager.shared().advertisingIdentifier.uuidString
@@ -70,11 +71,13 @@ public class UserAcquisition: NSObject {
                 return nil
             }
         }
+        
         let iap: [String: Any] = [
             "product_id": product.productIdentifier,
             "price": product.price.stringValue,
             "currency": product.priceLocale.currencyCode ?? "",
         ]
+        
         var extra: [String: Any] = [
             "acquisition_source": acquisitionSource,
             "acquisition_date": Int(info.acquisitionDate.timeIntervalSince1970),
@@ -84,14 +87,17 @@ public class UserAcquisition: NSObject {
             "vendor_id": UIDevice.current.identifierForVendor?.uuidString ?? "",
             "appsflyer_id": info.appsFlyerId,
             "appmetrica_device_id": info.appmetricaId,
+            "amplitude_device_id": info.amplitudeId,
             "adjust_raw": info.adjustRaw,
             "appsflyer_raw": info.appsFlyerRaw,
             "searchads_raw": info.searchAdsRaw,
             "branch_raw": info.branchRaw
         ]
+        
         for (field, value) in info.extra {
             extra[field] = value
         }
+        
         let params: [String: Any?] = [
             "bundle_id": Bundle.main.bundleIdentifier ?? "",
             "afi": afi,
@@ -101,6 +107,7 @@ public class UserAcquisition: NSObject {
             "extra": extra,
             "api_key": APIKey
         ]
+        
         var request = URLRequest(url: URL(string: urlRequest)!)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: params)
@@ -138,6 +145,7 @@ extension UserAcquisition {
         var adCreative = ""
         public var appsFlyerId = ""
         public var appmetricaId = ""
+        public var amplitudeId = ""
         var adjustRaw = ""
         var appsFlyerRaw = ""
         var searchAdsRaw = ""
