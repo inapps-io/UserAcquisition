@@ -19,6 +19,7 @@ pod 'UserAcquisition', :git => "https://github.com/inapps-io/UserAcquisition.git
 In didFinishLaunchingWithOptions method:
 ```swift
 UserAcquisition.shared.configure(withAPIKey: "APIKey")
+or
 UserAcquisition.shared.configure(withAPIKey: "APIKey", urlRequest: "Here select URL from Enum or enter your")
 
 Enum URLs:
@@ -32,7 +33,7 @@ After successful purchase:
 UserAcquisition.shared.logPurchase(of: product, endPointUrl: "Here select end point from Enum or enter your")
 
 Enum End point:
-    enum EndPoins: String {
+    enum EndPoints: String {
         case receipt = "/receipt"
         case pushToken = "/ios/push_token"
     }
@@ -42,7 +43,7 @@ After receiving PushDeviceToken:
 UserAcquisition.shared.log(pushDeviceToken: "PushDeviceToken", and originaTransactionID: "OriginalTransactionID", endPointUrl: "Here select end point from Enum or enter your")
 
 Enum End point:
-    enum EndPoins: String {
+    enum EndPoints: String {
         case receipt = "/receipt"
         case pushToken = "/ios/push_token"
     }
