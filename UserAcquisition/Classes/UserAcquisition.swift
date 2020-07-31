@@ -18,7 +18,7 @@ public class UserAcquisition: NSObject {
         case subr = "https://api.subr.app/v1"
     }
     
-    public enum EndPoins: String {
+    public enum EndPoints: String {
         case receipt = "/receipt"
         case pushToken = "/ios/push_token"
     }
@@ -35,7 +35,7 @@ public class UserAcquisition: NSObject {
         self.urlRequest = urlRequest.rawValue
     }
     
-    public func log(pushDeviceToken: String, and originaTransactionID: String, endPointUrl: EndPoins) {
+    public func log(pushDeviceToken: String, and originaTransactionID: String, endPointUrl: EndPoints) {
         
         let params: [String: Any] = [
             "api_key": APIKey,
@@ -46,7 +46,7 @@ public class UserAcquisition: NSObject {
         requestToServer(params: params, endPoint: .pushToken)
     }
     
-    public func logPurchase(of product: SKProduct, endPointUrl: EndPoins) {
+    public func logPurchase(of product: SKProduct, endPointUrl: EndPoints) {
         var receipt: String?
         let group = DispatchGroup()
         group.enter()
@@ -71,7 +71,7 @@ public class UserAcquisition: NSObject {
         conversionInfo.extra[key] = value
     }
 
-    private func logPurchase(info: Info, product: SKProduct, receipt: String, endPoint: EndPoins) {
+    private func logPurchase(info: Info, product: SKProduct, receipt: String, endPoint: EndPoints) {
         
         var acquisitionSource: String {
             switch info.acquisitionSource {
@@ -133,7 +133,7 @@ public class UserAcquisition: NSObject {
         requestToServer(params: params, endPoint: endPoint)
     }
     
-    private func requestToServer(params: [String: Any?], endPoint: EndPoins) {
+    private func requestToServer(params: [String: Any?], endPoint: EndPoints) {
         
         var request = URLRequest(url: URL(string: urlRequest + endPoint.rawValue)!)
         request.httpMethod = "POST"
