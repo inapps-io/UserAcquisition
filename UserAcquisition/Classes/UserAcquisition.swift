@@ -13,6 +13,16 @@ import SwiftyStoreKit
 
 public class UserAcquisition: NSObject {
 
+    public enum Urls: String {
+        case inapps = "https://api.inapps.io/v2"
+        case subr = "https://api.subr.app/v1"
+    }
+    
+    public enum EndPoins: String {
+        case receipt = "/receipt"
+        case pushToken = "/ios/push_token"
+    }
+    
     public static let shared = UserAcquisition()
     
     public var conversionInfo = UserAcquisition.Info()
@@ -20,12 +30,23 @@ public class UserAcquisition: NSObject {
     private var APIKey = ""
     private var urlRequest = ""
 
-    public func configure(withAPIKey APIKey: String, urlRequest: String = "https://api.inapps.io/v2/receipt") {
+    public func configure(withAPIKey APIKey: String, urlRequest: Urls = .inapps) {
         self.APIKey = APIKey
-        self.urlRequest = urlRequest
+        self.urlRequest = urlRequest.rawValue
     }
     
-    public func logPurchase(of product: SKProduct) {
+    public func log(pushDeviceToken: String, and originaTransactionID: String, endPointUrl: EndPoins) {
+        
+        let params: [String: Any] = [
+            "api_key": APIKey,
+            "push_token": pushDeviceToken,
+            "original_transaction_id": originaTransactionID
+        ]
+        
+        requestToServer(params: params, endPoint: .pushToken)
+    }
+    
+    public func logPurchase(of product: SKProduct, endPointUrl: EndPoins) {
         var receipt: String?
         let group = DispatchGroup()
         group.enter()
@@ -41,7 +62,7 @@ public class UserAcquisition: NSObject {
         }
         group.notify(queue: .global()) {
             if let receipt = receipt {
-                self.logPurchase(info: self.conversionInfo, product: product, receipt: receipt)
+                self.logPurchase(info: self.conversionInfo, product: product, receipt: receipt, endPoint: endPointUrl)
             }
         }
     }
@@ -50,7 +71,8 @@ public class UserAcquisition: NSObject {
         conversionInfo.extra[key] = value
     }
 
-    private func logPurchase(info: Info, product: SKProduct, receipt: String) {
+    private func logPurchase(info: Info, product: SKProduct, receipt: String, endPoint: EndPoins) {
+        
         var acquisitionSource: String {
             switch info.acquisitionSource {
             case .facebook:
@@ -108,7 +130,12 @@ public class UserAcquisition: NSObject {
             "api_key": APIKey
         ]
         
-        var request = URLRequest(url: URL(string: urlRequest)!)
+        requestToServer(params: params, endPoint: endPoint)
+    }
+    
+    private func requestToServer(params: [String: Any?], endPoint: EndPoins) {
+        
+        var request = URLRequest(url: URL(string: urlRequest + endPoint.rawValue)!)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: params)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

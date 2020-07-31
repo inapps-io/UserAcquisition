@@ -1,5 +1,4 @@
 import XCTest
-import UserAcquisition
 
 class Tests: XCTestCase {
     
