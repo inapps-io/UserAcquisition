@@ -11,22 +11,27 @@ import AdSupport
 import StoreKit
 import SwiftyStoreKit
 
+public protocol AcquisitionRawRepresentable {
+    
+    var rawValue: String { get set }
+}
+
 open class UserAcquisition: NSObject {
 
-    struct Urls: RawRepresentable {
+    public struct Urls: AcquisitionRawRepresentable {
         
-        var rawValue: String
+        public var rawValue: String
         
-        static let inapps = Urls(rawValue: "https://api.inapps.io/v2")
-        static let subr = Urls(rawValue: "https://api.subr.app/v1")
+        public static let inapps = Urls(rawValue: "https://api.inapps.io/v2")
+        public static let subr = Urls(rawValue: "https://api.subr.app/v1")
     }
     
-    struct EndPoins: RawRepresentable {
+    public struct EndPoins: AcquisitionRawRepresentable {
+                
+        public var rawValue: String
         
-        var rawValue: String
-        
-        static let receipt = EndPoins(rawValue: "/receipt")
-        static let pushToken = EndPoins(rawValue: "/ios/push_token")
+        public static let receipt = EndPoins(rawValue: "/receipt")
+        public static let pushToken = EndPoins(rawValue: "/ios/push_token")
     }
     
     public static let shared = UserAcquisition()
@@ -36,12 +41,13 @@ open class UserAcquisition: NSObject {
     private var APIKey = ""
     private var urlRequest = ""
 
-    func configure(withAPIKey APIKey: String, urlRequest: Urls = .inapps) {
+    public func configure(withAPIKey APIKey: String, urlRequest: Urls = .inapps) {
+        
         self.APIKey = APIKey
         self.urlRequest = urlRequest.rawValue
     }
     
-    func log(pushDeviceToken: String, and originaTransactionID: String, endPointUrl: EndPoins) {
+    public func log(pushDeviceToken: String, and originaTransactionID: String, endPointUrl: EndPoins) {
         
         let params: [String: Any] = [
             "api_key": APIKey,
