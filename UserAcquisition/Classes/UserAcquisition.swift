@@ -12,7 +12,6 @@ import StoreKit
 import SwiftyStoreKit
 
 public protocol AcquisitionRawRepresentable {
-    
     var rawValue: String { get set }
 }
 
@@ -24,6 +23,10 @@ open class UserAcquisition: NSObject {
         
         public static let inapps = Urls(rawValue: "https://api.inapps.io/v2")
         public static let subr = Urls(rawValue: "https://api.subr.app/v1")
+        
+        public init(rawValue: String) {
+            self.rawValue = rawValue
+        }
     }
     
     public struct EndPoins: AcquisitionRawRepresentable {
@@ -32,6 +35,10 @@ open class UserAcquisition: NSObject {
         
         public static let receipt = EndPoins(rawValue: "/receipt")
         public static let pushToken = EndPoins(rawValue: "/ios/push_token")
+        
+        public init(rawValue: String) {
+            self.rawValue = rawValue
+        }
     }
     
     public static let shared = UserAcquisition()
@@ -58,7 +65,7 @@ open class UserAcquisition: NSObject {
         requestToServer(params: params, endPoint: .pushToken)
     }
     
-    public func logPurchase(of product: SKProduct, endPointUrl: EndPoins) {
+    internal func logPurchase(of product: SKProduct, endPointUrl: EndPoins) {
         var receipt: String?
         let group = DispatchGroup()
         group.enter()
