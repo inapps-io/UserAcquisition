@@ -22,31 +22,37 @@ UserAcquisition.shared.configure(withAPIKey: "APIKey")
 or
 UserAcquisition.shared.configure(withAPIKey: "APIKey", urlRequest: "Here select URL from Enum or enter your")
 
-Enum URLs:
-    enum Urls: String {
-        case inapps = "https://api.inapps.io/v2"
-        case subr = "https://api.subr.app/v1"
-    }
+struct Urls: RawRepresentable {
+        
+    public var rawValue: String
+        
+    static let inapps = Urls(rawValue: "https://api.inapps.io/v2")
+    static let subr = Urls(rawValue: "https://api.subr.app/v1")
+}
 ```
 After successful purchase:
 ```swift
 UserAcquisition.shared.logPurchase(of: product, endPointUrl: "Here select end point from Enum or enter your")
 
-Enum End point:
-    enum EndPoints: String {
-        case receipt = "/receipt"
-        case pushToken = "/ios/push_token"
-    }
+struct EndPoins: RawRepresentable {
+        
+    var rawValue: String
+        
+    static let receipt = EndPoins(rawValue: "/receipt")
+    static let pushToken = EndPoins(rawValue: "/ios/push_token")
+}
 ```
 After receiving PushDeviceToken:
 ```swift
 UserAcquisition.shared.log(pushDeviceToken: "PushDeviceToken", and originaTransactionID: "OriginalTransactionID", endPointUrl: "Here select end point from Enum or enter your")
 
-Enum End point:
-    enum EndPoints: String {
-        case receipt = "/receipt"
-        case pushToken = "/ios/push_token"
-    }
+struct EndPoins: RawRepresentable {
+        
+    var rawValue: String
+        
+    static let receipt = EndPoins(rawValue: "/receipt")
+    static let pushToken = EndPoins(rawValue: "/ios/push_token")
+}
 ```
 Add AppsFlyer:
 ```swift
