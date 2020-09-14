@@ -11,11 +11,11 @@ import AdSupport
 import StoreKit
 import SwiftyStoreKit
 
-public class UserAcquisition: NSObject {
+open class UserAcquisition: NSObject {
 
     struct Urls: RawRepresentable {
         
-        public var rawValue: String
+        var rawValue: String
         
         static let inapps = Urls(rawValue: "https://api.inapps.io/v2")
         static let subr = Urls(rawValue: "https://api.subr.app/v1")
