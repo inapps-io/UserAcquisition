@@ -65,7 +65,7 @@ open class UserAcquisition: NSObject {
         requestToServer(params: params, endPoint: .pushToken)
     }
     
-    internal func logPurchase(of product: SKProduct, endPointUrl: EndPoins) {
+    public func logPurchase(of product: SKProduct, endPointUrl: EndPoins) {
         var receipt: String?
         let group = DispatchGroup()
         group.enter()
