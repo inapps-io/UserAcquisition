@@ -36,12 +36,12 @@ open class UserAcquisition: NSObject {
     private var APIKey = ""
     private var urlRequest = ""
 
-    internal func configure(withAPIKey APIKey: String, urlRequest: Urls = .inapps) {
+    func configure(withAPIKey APIKey: String, urlRequest: Urls = .inapps) {
         self.APIKey = APIKey
         self.urlRequest = urlRequest.rawValue
     }
     
-    internal func log(pushDeviceToken: String, and originaTransactionID: String, endPointUrl: EndPoins) {
+    func log(pushDeviceToken: String, and originaTransactionID: String, endPointUrl: EndPoins) {
         
         let params: [String: Any] = [
             "api_key": APIKey,
