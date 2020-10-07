@@ -87,6 +87,10 @@ YMMYandexMetrica.requestAppMetricaDeviceID(withCompletionQueue: .main) { [unowne
     UserAcquisition.shared.conversionInfo.appmetricaId = id ?? ""
 }
 ```
+Add Amplitude:
+```swift
+UserAcquisition.shared.conversionInfo.amplitudeId = "Amplitude_KEY"
+```
 
 ## Author
 
