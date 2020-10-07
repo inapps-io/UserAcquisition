@@ -27,7 +27,7 @@ struct Urls: RawRepresentable {
     public var rawValue: String
         
     static let inapps = Urls(rawValue: "https://api.inapps.io/v2")
-    static let subr = Urls(rawValue: "https://api.subr.app/v1")
+    static let subr = Urls(rawValue: "https://api.subr.app/v2")
 }
 ```
 After successful purchase:
