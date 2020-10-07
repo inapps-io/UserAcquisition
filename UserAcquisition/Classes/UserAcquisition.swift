@@ -22,7 +22,7 @@ open class UserAcquisition: NSObject {
         public var rawValue: String
         
         public static let inapps = Urls(rawValue: "https://api.inapps.io/v2")
-        public static let subr = Urls(rawValue: "https://api.subr.app/v1")
+        public static let subr = Urls(rawValue: "https://api.subr.app/v2")
         
         public init(rawValue: String) {
             self.rawValue = rawValue
