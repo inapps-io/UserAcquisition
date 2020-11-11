@@ -105,12 +105,8 @@ open class UserAcquisition: NSObject {
             }
         }
         
-        var afi: String? {
-            if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
-                return ASIdentifierManager.shared().advertisingIdentifier.uuidString
-            } else {
-                return nil
-            }
+        var afi: String {
+            return ASIdentifierManager.shared().advertisingIdentifier.uuidString
         }
         
         let iap: [String: Any] = [
@@ -132,7 +128,8 @@ open class UserAcquisition: NSObject {
             "adjust_raw": info.adjustRaw,
             "appsflyer_raw": info.appsFlyerRaw,
             "searchads_raw": info.searchAdsRaw,
-            "branch_raw": info.branchRaw
+            "branch_raw": info.branchRaw,
+            "fb_anonymous_id": info.fbAnonymousId
         ]
         
         for (field, value) in info.extra {
@@ -192,6 +189,7 @@ extension UserAcquisition {
         public var appsFlyerId = ""
         public var appmetricaId = ""
         public var amplitudeId = ""
+        public var fbAnonymousId = ""
         var adjustRaw = ""
         var appsFlyerRaw = ""
         var searchAdsRaw = ""
