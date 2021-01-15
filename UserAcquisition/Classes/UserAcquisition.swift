@@ -23,6 +23,11 @@ open class UserAcquisition: NSObject {
         
         public static let inapps = Urls(rawValue: "https://api.inapps.io/v2")
         public static let subr = Urls(rawValue: "https://api.subr.app/v2")
+        public static let chkmob = Urls(rawValue: "https://api.chkmob.com/v2")
+        public static let bittiu = Urls(rawValue: "https://api.bittiu.com/v2")
+        public static let trklabs = Urls(rawValue: "https://api.trklabs.com/v2")
+        public static let devpng = Urls(rawValue: "https://api.devpng.com/v2")
+        public static let pingfront = Urls(rawValue: "https://api.pingfront.com/v2")
         
         public init(rawValue: String) {
             self.rawValue = rawValue
@@ -54,7 +59,7 @@ open class UserAcquisition: NSObject {
         self.urlRequest = urlRequest.rawValue
     }
     
-    public func log(pushDeviceToken: String, and originaTransactionID: String, endPointUrl: EndPoins) {
+    public func log(pushDeviceToken: String, and originaTransactionID: String) {
         
         let params: [String: Any] = [
             "api_key": APIKey,
@@ -65,7 +70,7 @@ open class UserAcquisition: NSObject {
         requestToServer(params: params, endPoint: .pushToken)
     }
     
-    public func logPurchase(of product: SKProduct, endPointUrl: EndPoins) {
+    public func logPurchase(of product: SKProduct) {
         var receipt: String?
         let group = DispatchGroup()
         group.enter()
@@ -81,7 +86,7 @@ open class UserAcquisition: NSObject {
         }
         group.notify(queue: .global()) {
             if let receipt = receipt {
-                self.logPurchase(info: self.conversionInfo, product: product, receipt: receipt, endPoint: endPointUrl)
+                self.logPurchase(info: self.conversionInfo, product: product, receipt: receipt)
             }
         }
     }
@@ -90,7 +95,7 @@ open class UserAcquisition: NSObject {
         conversionInfo.extra[key] = value
     }
 
-    private func logPurchase(info: Info, product: SKProduct, receipt: String, endPoint: EndPoins) {
+    private func logPurchase(info: Info, product: SKProduct, receipt: String) {
         
         var acquisitionSource: String {
             switch info.acquisitionSource {
@@ -146,7 +151,7 @@ open class UserAcquisition: NSObject {
             "api_key": APIKey
         ]
         
-        requestToServer(params: params, endPoint: endPoint)
+        requestToServer(params: params, endPoint: .receipt)
     }
     
     private func requestToServer(params: [String: Any?], endPoint: EndPoins) {
