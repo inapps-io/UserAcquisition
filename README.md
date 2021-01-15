@@ -26,33 +26,22 @@ struct Urls: RawRepresentable {
         
     public var rawValue: String
         
-    static let inapps = Urls(rawValue: "https://api.inapps.io/v2")
-    static let subr = Urls(rawValue: "https://api.subr.app/v2")
+    public static let inapps = Urls(rawValue: "https://api.inapps.io/v2")
+    public static let subr = Urls(rawValue: "https://api.subr.app/v2")
+    public static let chkmob = Urls(rawValue: "https://api.chkmob.com/v2")
+    public static let bittiu = Urls(rawValue: "https://api.bittiu.com/v2")
+    public static let trklabs = Urls(rawValue: "https://api.trklabs.com/v2")
+    public static let devpng = Urls(rawValue: "https://api.devpng.com/v2")
+    public static let pingfront = Urls(rawValue: "https://api.pingfront.com/v2")
 }
 ```
 After successful purchase:
 ```swift
-UserAcquisition.shared.logPurchase(of: product, endPointUrl: "Here select end point from Enum or enter your")
-
-struct EndPoins: RawRepresentable {
-        
-    var rawValue: String
-        
-    static let receipt = EndPoins(rawValue: "/receipt")
-    static let pushToken = EndPoins(rawValue: "/ios/push_token")
-}
+UserAcquisition.shared.logPurchase(of: product)
 ```
 After receiving PushDeviceToken:
 ```swift
-UserAcquisition.shared.log(pushDeviceToken: "PushDeviceToken", and originaTransactionID: "OriginalTransactionID", endPointUrl: "Here select end point from Enum or enter your")
-
-struct EndPoins: RawRepresentable {
-        
-    var rawValue: String
-        
-    static let receipt = EndPoins(rawValue: "/receipt")
-    static let pushToken = EndPoins(rawValue: "/ios/push_token")
-}
+UserAcquisition.shared.log(pushDeviceToken: "PushDeviceToken", and originaTransactionID: "OriginalTransactionID")
 ```
 Add AppsFlyer:
 ```swift
