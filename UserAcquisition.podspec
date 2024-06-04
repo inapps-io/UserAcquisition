@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '8.0'
   s.swift_version         = '4.0'
 
-  s.source_files = 'UserAcquisition/Classes/**/*'
+  s.source_files = 'Sources/UserAcquisition/**/*'
   
   # s.resource_bundles = {
   #   'UserAcquisition' => ['UserAcquisition/Assets/*.png']
